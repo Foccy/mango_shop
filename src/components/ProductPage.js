@@ -8,7 +8,7 @@ const ProductPage = () => {
 	const { id } = useParams();
 	const [product, setProduct] = useState(null);
 	useEffect(() => {
-		let url = `https://6baa76cd-7a9e-48db-a13d-b380801541d6.mock.pstmn.io/products/${id}`;
+		let url = `http://localhost:8080/products/${id}`;
 		axios
 			.get(url)
 			.then((result) => {
@@ -26,7 +26,7 @@ const ProductPage = () => {
 		<div>
 			<h1>{product.name}상품상세페이지</h1>
     <h2>{id}번째 상품 정보 입니다</h2>
-    <img src={`https://6baa76cd-7a9e-48db-a13d-b380801541d6.mock.pstmn.io/products/${product.imageUrl}`} alt=""/>
+    <img src={`http://localhost:8080//products/${product.imageUrl}`} alt=""/>
     <Link to={`/`}>
       <button>홈으로 돌아가기</button>
     </Link>
