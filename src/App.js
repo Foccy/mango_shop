@@ -1,19 +1,32 @@
-import {Routes,Route,Link, useNavigate} from "react-router-dom"
-import MainPage from "./components/MainPage"
+import React from "react";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { Button } from "antd";
 import "antd/dist/reset.css";
-import { UploadOutlined} from "@ant-design/icons";
-import ProductPage from "./components/ProductPage"
-import UploadPage from "./components/UploadPage"
+import "./App.css";
+import MainPage from "./components/MainPage";
+import Component from "./components/grid";
+import ProductPage from "./components/ProductPage";
+import UploadPage from "./components/UploadPage";
+import { UploadOutlined } from "@ant-design/icons";
+
 function App() {
-	let navigate=useNavigate()
+	let navigate=useNavigate();
+
 	return (
 		<div>
 			<div id="header">
 				<div id="header-area">
-					<Link to="/"></Link>
-					<Button icon={<UploadOutlined />}size="large" onClick={()=>{navigate('/UploadPage')}}>상품 업로드</Button>
-					<Link><img src="/images/icons/logo.png" alt="" /></Link>
+					<Link to="/">
+						<img src="/images/icons/logo.png" alt="" />
+					</Link>
+					<Button
+						icon={<UploadOutlined />}
+						size="large"
+						onClick={() => {
+							navigate('/UploadPage');
+						}}>
+						상품업로드
+					</Button>
 				</div>
 			</div>
 
@@ -29,6 +42,7 @@ function App() {
 				<a href="#">사업자등록번호:456-56-78951</a>
 				<a href="#">고객센터:456-78951</a>
 			</div>
+			<Component></Component>
 		</div>
 	);
 }

@@ -1,22 +1,22 @@
-import React from "react";
-import { Form, Input,Button,Upload, Divider, InputNumber } from "antd";
+import React, { useEffect } from "react";
+import { Form, Input, Button, Upload, Divider, InputNumber } from "antd";
 import "./UploadPage.css";
 const { TextArea } = Input;
-
 const UploadPage = () => {
-	const onFinish= (val)=>{console.log(val)}
+	const onFinish = (val) => {
+		console.log(val);
+	};
 	return (
-	<div>
-			<div id="upload-container">
-				<Form name="uploadForm" onFinish={onFinish}>
-					<Form.Item name="upload">
-						<div id = "upload-img">
-							<img src="/images/icons/camera.png" alt=""/>
-							<span>이미지를 업로드</span>
-						</div>
-					</Form.Item>
-					<Divider></Divider>
-					<Form.Item label={<span className="upload-label">상품명</span>} name="product-name" rules={[{ required: true, message: "상품명은 필수 입력 사항입니다." }]}>
+		<div id="upload-container">
+			<Form name="uploadForm" onFinish={onFinish}>
+				<Form.Item name="upload">
+					<div id="upload-img">
+						<img src="/images/icons/camera.png" alt="" />
+						<span>이미지를 업로드 해주세요</span>
+					</div>
+				</Form.Item>
+				<Divider></Divider>
+				<Form.Item label={<span className="upload-label">상품명</span>} name="product-name" rules={[{ required: true, message: "상품명은 필수 입력 사항입니다." }]}>
 					<Input className="upload-name" placeholder="상품명을 입력해주세요" size="large" />
 				</Form.Item>
 				<Divider></Divider>
@@ -32,9 +32,8 @@ const UploadPage = () => {
 						상품등록하기
 					</Button>
 				</Form.Item>
-				</Form>
-			</div>
-	</div>
-	)
+			</Form>
+		</div>
+	);
 };
 export default UploadPage;

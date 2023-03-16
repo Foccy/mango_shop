@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
-import{Link} from 'react-router-dom'
-import "./MainPage.css";
+import { Link } from "react-router-dom";
+
 import axios from "axios";
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+dayjs.extend(relativeTime)
+
 
 const MainPage = () => {
 	const [products, setProducts] = useState([]);
@@ -10,13 +14,15 @@ const MainPage = () => {
 		axios
 			.get(url)
 			.then((result) => {
-				const products = result.data.products;
+				console.log(result);
+				const products = result.data.product;
 				setProducts(products);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 	}, []);
+	
 	return (
 		<div>
 			<div id="body">
@@ -35,10 +41,13 @@ const MainPage = () => {
 									<div className="product-content">
 										<span className="product-name">{product.name}</span>
 										<span className="product-price">{product.price}</span>
-										<span className="product-seller">
-											<img src="images/icons/avatar.png" className="product-avatar" alt="{product.seller}" />
-											<span>{product.seller}</span>
-										</span>
+										<div className="product-footer">
+											<span className="product-seller">
+												<img src="images/icons/avatar.png" className="product-avatar" alt="{product.seller}" />
+												<span>{product.seller}</span>
+											</span>
+											<span className="product-date">상품등록일:{dayjs(product.createdAt).format('DD일/MM월/YYYY년')}</span>
+										</div>
 									</div>
 								</Link>
 							</div>
