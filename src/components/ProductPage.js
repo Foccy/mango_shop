@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { API_URL } from "../config/constants.js";
+
 import axios from "axios";
 import "./ProductPage.css";
-import dayjs from "dayjs"
-import relativeTime from "dayjs/plugin/relativeTime"
-dayjs.extend(relativeTime)
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 
 const ProductPage = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const [product, setProduct] = useState(null);
 	useEffect(() => {
-		let url = `http://localhost:8080/products/${id}`;
+		let url = `${API_URL}/products/${id}`;
 		axios
 			.get(url)
 			.then((result) => {
+				console.log(result);
 				setProduct(result.data.product);
 			})
 			.catch((error) => {
@@ -38,15 +41,14 @@ const ProductPage = () => {
 			</div>
 			<div id="profile-box">
 				<img src="/images/icons/avatar.png" alt={product.seller} />
-        <span className="product-seller">{product.seller}</span>
+				<span className="product-seller">{product.seller}</span>
 			</div>
-      <div className="content-box">
-        <div id="name">{product.name}</div>
-        <div id="price">{product.price}</div>
-        <div id="createAt">상품등록일{dayjs(product.createdAt).format('DD/MM/YYYY')}</div>
-        <div id="description">{product.createdAt}</div>
-        <div id="description">{product.description}</div>
-      </div>
+			<div className="content-box">
+				<div id="name">{product.name}</div>
+				<div id="price">{product.price}</div>
+				<div className="product-date">상품등록일: {dayjs(product.createdAt).format("YY년MM월DD일-hh시MM분ss초")}</div>
+				<div id="description">{product.description}</div>
+			</div>
 		</div>
 	);
 };

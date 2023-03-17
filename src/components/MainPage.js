@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { API_URL } from "../config/constants.js";
 import axios from "axios";
-import dayjs from "dayjs"
-import relativeTime from "dayjs/plugin/relativeTime"
-dayjs.extend(relativeTime)
-
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 
 const MainPage = () => {
 	const [products, setProducts] = useState([]);
 	useEffect(() => {
-		let url = "http://localhost:8080/products";
+		let url = `${API_URL}/products`;
 		axios
 			.get(url)
 			.then((result) => {
-				console.log(result);
 				const products = result.data.product;
 				setProducts(products);
 			})
@@ -22,7 +20,6 @@ const MainPage = () => {
 				console.log(error);
 			});
 	}, []);
-	
 	return (
 		<div>
 			<div id="body">
@@ -46,7 +43,7 @@ const MainPage = () => {
 												<img src="images/icons/avatar.png" className="product-avatar" alt="{product.seller}" />
 												<span>{product.seller}</span>
 											</span>
-											<span className="product-date">상품등록일:{dayjs(product.createdAt).format('DD일/MM월/YYYY년')}</span>
+											<span className="product-date">상품등록일: {dayjs(product.createdAt).format("YY년MM월DD일-hh시MM분ss초")}</span>
 										</div>
 									</div>
 								</Link>
